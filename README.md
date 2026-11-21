@@ -19,15 +19,15 @@ This repository documents my hands-on lab work learning cloud Identity and Acces
 * **What I Built:** Created a standard cloud user account for **Keith Mazinga** (`KeithM@://onmicrosoft.com`), configured required directory attributes including `Usage location` (`United States`), and verified end-user authentication through the Microsoft My Apps / Microsoft 365 portal.
 * **Why It Matters in IAM:** In enterprise onboarding, creating an account is only the first step—verifying first-time password resets and portal access ensures a new hire can actually authenticate before tickets start coming in.
 
-![Keith Mazinga User Creation](images/01-keith-mazinga-user-creation.png)
+![Keith Mazinga User Creation](01-keith-mazinga-user-creation.png)
 
-![Keith Mazinga End-User Portal Verification](images/02-keith-mazinga-sso-verification.png)
+![Keith Mazinga End-User Portal Verification](02-keith-mazinga-sso-verification.png)
 
 #### 3. License Provisioning & Usage Location Enforcement
 * **What I Built:** Activated a Microsoft Entra ID P2 evaluation license pool and assigned a license directly to Keith Mazinga through the Microsoft 365 Admin Center, verifying the entitlement synced back to Entra ID (`1/100 assigned`).
 * **Why It Matters in IAM:** Identity creation and license assignment are separate layers. Setting a user's `Usage location` is a mandatory prerequisite in Entra ID because cloud service availability and compliance rules are tied to geographic region. Missing this attribute is a common cause of automated onboarding failures.
 
-![Entra ID P2 License Assignment](images/03-entra-p2-license-assignment.png)
+![Entra ID P2 License Assignment](03-entra-p2-license-assignment.png)
 
 #### 4. B2B Guest Collaboration & Delegated RBAC
 * **What I Built:** Invited an external contractor account using Microsoft Entra B2B collaboration (creating a `#EXT#` guest identity) and assigned the **Attribute Definition Reader** built-in role to Keith Mazinga.
@@ -37,9 +37,9 @@ This repository documents my hands-on lab work learning cloud Identity and Acces
 * **What I Built:** Provisioned additional employee test accounts (**Maya Lin** and **Devon Brooks**) to prepare the directory for group-based access control and reviewed Entra ID's CSV bulk-import schema (`UserCreateTemplate.csv`) for mass onboarding workflows.
 * **Why It Matters in IAM:** Manual user creation works for one-off requests, but understanding bulk CSV ingestion and attribute mapping is essential when onboarding large groups of hires or preparing for automated HR-driven provisioning.
 
-![Maya Lin User Profile](images/04-maya-lin-user-provisioning.png)
+![Maya Lin User Profile](04-maya-lin-user-provisioning.png)
 
-![Devon Brooks User Profile](images/05-devon-brooks-user-provisioning.png)
+![Devon Brooks User Profile](05-devon-brooks-user-provisioning.png)
 
 ---
 
