@@ -43,6 +43,43 @@ This repository documents my hands-on lab work learning cloud Identity and Acces
 
 ---
 
+
+# Lab 2: Basic Group Management & Group-Based Licensing
+
+## What I Did
+In this lab, I set up two different types of groups in Microsoft Entra ID (`://onmicrosoft.com`)—a Security Group and a Microsoft 365 Group—and configured group-based licensing so test users automatically inherit their Microsoft Entra ID P2 licenses instead of me assigning them one by one.
+
+---
+
+## Why This Matters in IAM
+* **Security Groups vs. Microsoft 365 Groups:** Security groups are used to control access permissions and license assignments, while Microsoft 365 groups are built for team collaboration and come with a shared group email address.
+* **Group-Based Licensing:** Assigning licenses one user at a time does not scale in a real company. By tying a license to a security group, users automatically inherit the entitlement when they are added to the group and lose it when they are removed.
+* **Group Ownership:** Assigning owners to a group establishes accountability for who manages membership and approves future access reviews.
+
+---
+
+## Walkthrough & Verification
+
+### 1. Created a Security Group (`Lab2-Security-Group`)
+I created a cloud Security Group with assigned membership and added two test users (`Maya Lin` and `Devon Brooks`) so I could manage their licenses together.
+
+![Lab2 Security Group Overview](images/01-lab2-security-group-overview.png)
+
+### 2. Assigned the Entra ID P2 License to the Group
+Instead of assigning licenses individually like I did for Keith Mazinga in Lab 1, I went into the Microsoft 365 admin center and assigned the **Microsoft Entra ID P2** license pool directly to `Lab2-Security-Group`. This bumped our active license usage from `1/100` to `3/100`.
+
+![Group-Based Licensing Assignment](images/02-group-based-licensing-assignment.png)
+
+### 3. Verified Inherited License Assignment
+I checked `Maya Lin`'s profile in the Entra admin center to make sure the license applied properly. Under **Assignment Paths**, it confirmed her **Microsoft Entra ID P2** license (`4/4` services enabled) was **Inherited** from `Lab2-Security-Group`.
+
+![Inherited License Verification](images/03-inherited-license-verification.png)
+
+### 4. Created a Microsoft 365 Group (`CFG-All-Hands-M365`)
+Next, I created an assigned Microsoft 365 group with its own group email (`CFG-All-Hands-M365@://onmicrosoft.com`), set `2` owners, and added `2` direct members.
+
+![CFG All Hands M365 Group Overview](images/04-cfg-all-hands-m365-overview.png)
+
 ## Key IAM Takeaways From Lab 1
 * **Identity vs. Entitlements:** Provisioning a User Principal Name (UPN) only establishes authentication; licenses and RBAC roles control what services and administrative views the user can actually access.
 * **Attribute Dependencies:** Directory attributes like `Usage location` directly impact downstream license assignments and automation scripts.
