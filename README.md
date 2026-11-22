@@ -63,22 +63,22 @@ In this lab, I set up two different types of groups in Microsoft Entra ID (`://o
 ### 1. Created a Security Group (`Lab2-Security-Group`)
 I created a cloud Security Group with assigned membership and added two test users (`Maya Lin` and `Devon Brooks`) so I could manage their licenses together.
 
-![Lab2 Security Group Overview](images/01-lab2-security-group-overview.png)
+![Lab2 Security Group Overview](images01-lab2-security-group-overview.png)
 
 ### 2. Assigned the Entra ID P2 License to the Group
 Instead of assigning licenses individually like I did for Keith Mazinga in Lab 1, I went into the Microsoft 365 admin center and assigned the **Microsoft Entra ID P2** license pool directly to `Lab2-Security-Group`. This bumped our active license usage from `1/100` to `3/100`.
 
-![Group-Based Licensing Assignment](images/02-group-based-licensing-assignment.png)
+![Group-Based Licensing Assignment](images02-group-based-licensing-assignment.png)
 
 ### 3. Verified Inherited License Assignment
 I checked `Maya Lin`'s profile in the Entra admin center to make sure the license applied properly. Under **Assignment Paths**, it confirmed her **Microsoft Entra ID P2** license (`4/4` services enabled) was **Inherited** from `Lab2-Security-Group`.
 
-![Inherited License Verification](images/03-inherited-license-verification.png)
+![Inherited License Verification](images03-inherited-license-verification.png)
 
 ### 4. Created a Microsoft 365 Group (`CFG-All-Hands-M365`)
 Next, I created an assigned Microsoft 365 group with its own group email (`CFG-All-Hands-M365@://onmicrosoft.com`), set `2` owners, and added `2` direct members.
 
-![CFG All Hands M365 Group Overview](images/04-cfg-all-hands-m365-overview.png)
+![CFG All Hands M365 Group Overview](images04-cfg-all-hands-m365-overview.png)
 
 ## Key IAM Takeaways From Lab 1
 * **Identity vs. Entitlements:** Provisioning a User Principal Name (UPN) only establishes authentication; licenses and RBAC roles control what services and administrative views the user can actually access.
