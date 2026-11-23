@@ -84,3 +84,40 @@ Next, I created an assigned Microsoft 365 group with its own group email (`CFG-A
 * **Identity vs. Entitlements:** Provisioning a User Principal Name (UPN) only establishes authentication; licenses and RBAC roles control what services and administrative views the user can actually access.
 * **Attribute Dependencies:** Directory attributes like `Usage location` directly impact downstream license assignments and automation scripts.
 * **Admin Boundary Awareness:** Consumer Microsoft accounts cannot manage Microsoft 365 licensing portals, requiring a dedicated `@onmicrosoft.com` organizational admin account.
+
+
+
+# Lab 3: Password Protection & Smart Lockout
+
+## What I Did
+In this lab, I configured Microsoft Entra Password Protection and Smart Lockout in my tenant (`jadoncfglaboutlook.onmicrosoft.com`) to stop users from choosing predictable, organization-related passwords and to block brute-force sign-in attempts against test accounts.
+
+---
+
+## Why This Matters in IAM
+* **Custom Banned Passwords:** Even when passwords meet standard length and complexity rules, attackers still guess variations tied to the company's name, location, or job roles (such as `CFGBank2026!`). Enforcing a custom banned password list blocks those predictable patterns automatically.
+* **Smart Lockout:** Standard account lockouts let attackers intentionally lock out real employees by spamming failed logins. Smart Lockout tracks familiar versus unfamiliar locations and ignores repeated guesses of the last three wrong passwords so legitimate users stay working while brute-force attacks get blocked.
+* **Audit Mode Preparation:** Enabling Windows Server Active Directory password protection in **Audit** mode lets an IAM team monitor how password policies affect on-premises accounts without unexpectedly blocking users before full hybrid rollout.
+
+---
+
+## Walkthrough & Verification
+
+### 1. Configured Smart Lockout & Custom Banned Passwords
+In the Microsoft Entra admin center under **Authentication methods > Password protection**, I configured:
+* **Lockout threshold:** `5` failed attempts
+* **Lockout duration in seconds:** `60` seconds
+* **Custom banned password list:** Enabled with `cfgbank`, `towson`, `teller`, `jadon`, and `labs`
+* **Windows Server Active Directory password protection:** Enabled in **Audit** mode to prepare for future on-premises Active Directory integration
+
+![Password Protection Settings](images/01-password-protection-settings.png)
+
+### 2. Verified Custom Banned Password Enforcement
+I signed in as test user `othenialk@jadoncfglaboutlook.onmicrosoft.com` during a required first-time password update and attempted to use a password containing one of my custom banned keywords. Entra Password Protection rejected the password immediately and prompted for a stronger choice.
+
+![Custom Banned Password Block](images/02-banned-password-blocked.png)
+
+### 3. Tested & Verified Smart Lockout (`AADSTS50053`)
+Next, I tested Smart Lockout on `chimaa@jadoncfglaboutlook.onmicrosoft.com` by entering consecutive unique invalid passwords past the configured lockout threshold. Once the threshold was crossed, Entra triggered a temporary lockout (`Your account is temporarily locked to prevent unauthorized use`) to block further brute-force attempts.
+
+![Smart Lockout Triggered](images/03-smart-lockout-triggered.png)
