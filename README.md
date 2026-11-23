@@ -110,14 +110,14 @@ In the Microsoft Entra admin center under **Authentication methods > Password pr
 * **Custom banned password list:** Enabled with `cfgbank`, `towson`, `teller`, `jadon`, and `labs`
 * **Windows Server Active Directory password protection:** Enabled in **Audit** mode to prepare for future on-premises Active Directory integration
 
-![Password Protection Settings](images/01-password-protection-settings.png)
+![Password Protection Settings](images01-password-protection-settings.png)
 
 ### 2. Verified Custom Banned Password Enforcement
 I signed in as test user `othenialk@jadoncfglaboutlook.onmicrosoft.com` during a required first-time password update and attempted to use a password containing one of my custom banned keywords. Entra Password Protection rejected the password immediately and prompted for a stronger choice.
 
-![Custom Banned Password Block](images/02-banned-password-blocked.png)
+![Custom Banned Password Block](images02-banned-password-blocked.png)
 
 ### 3. Tested & Verified Smart Lockout (`AADSTS50053`)
 Next, I tested Smart Lockout on `chimaa@jadoncfglaboutlook.onmicrosoft.com` by entering consecutive unique invalid passwords past the configured lockout threshold. Once the threshold was crossed, Entra triggered a temporary lockout (`Your account is temporarily locked to prevent unauthorized use`) to block further brute-force attempts.
 
-![Smart Lockout Triggered](images/03-smart-lockout-triggered.png)
+![Smart Lockout Triggered](images03-smart-lockout-triggered.png)
