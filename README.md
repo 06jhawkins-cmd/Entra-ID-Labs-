@@ -121,3 +121,42 @@ I signed in as test user `othenialk@jadoncfglaboutlook.onmicrosoft.com` during a
 Next, I tested Smart Lockout on `chimaa@jadoncfglaboutlook.onmicrosoft.com` by entering consecutive unique invalid passwords past the configured lockout threshold. Once the threshold was crossed, Entra triggered a temporary lockout (`Your account is temporarily locked to prevent unauthorized use`) to block further brute-force attempts.
 
 ![Smart Lockout Triggered](images03-smart-lockout-triggered.png)
+
+
+
+
+# Lab 4: Self-Service Password Reset (SSPR)
+
+## What I Did
+In this lab, I configured and tested Microsoft Entra Self-Service Password Reset (SSPR) in my tenant (`://onmicrosoft.com`) so users in a targeted security group can register recovery methods at sign-in and reset forgotten passwords on their own without calling the IT help desk.
+
+---
+
+## Why This Matters in IAM
+* **Scoped Pilot Rollout (`Selected` Group):** Rather than turning SSPR on for an entire company at once, IAM teams scope policies to a specific security group (`Lab2-Security-Group`) first to validate behavior before broad deployment.
+* **Multi-Factor Identity Proofing:** Requiring `2` authentication methods (such as Email OTP plus Microsoft Authenticator) ensures an attacker cannot take over an account just by compromising a single recovery channel.
+* **Reduced Help Desk Ticket Volume:** Password resets are one of the highest-volume IT support requests. Automated SSPR registration at sign-in ensures users set up recovery methods proactively while keeping password changes subject to Entra Password Protection rules.
+
+---
+
+## Walkthrough & Verification
+
+### 1. Scoped SSPR to a Security Group
+In the Microsoft Entra admin center under **Password reset > Properties**, I set **Self service password reset enabled** to **Selected** and targeted `Lab2-Security-Group`.
+
+![SSPR Properties Scoped to Security Group](images/01-sspr-properties-group-scope.png)
+
+### 2. Configured Two-Method Verification Policy
+Under **Password reset > Authentication methods**, I set the **Number of methods required to reset** to `2` and configured the unified **Authentication methods policy** so users can register and verify with **Email OTP** and **Microsoft Authenticator**.
+
+![SSPR Authentication Methods Configuration](images/02-sspr-authentication-methods.png)
+
+### 3. Registered Recovery Methods & Initiated SSPR
+After adding test user `chimaa@://onmicrosoft.com` to `Lab2-Security-Group`, I completed the mandatory sign-in registration prompt and initiated a password reset via **Forgot my password**, verifying both **verification step 1** (alternate email code) and **verification step 2** (Microsoft Authenticator).
+
+![SSPR Two-Step Verification Challenge](images/03-sspr-verification-steps.png)
+
+### 4. Confirmed Successful Password Reset
+After passing both verification challenges and setting a new password compliant with our Lab 3 custom banned password list, Entra confirmed the reset (`Your password has been reset`).
+
+![SSPR Password Reset Confirmation](images/04-sspr-reset-confirmation.png)
