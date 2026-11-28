@@ -144,19 +144,19 @@ In this lab, I configured and tested Microsoft Entra Self-Service Password Reset
 ### 1. Scoped SSPR to a Security Group
 In the Microsoft Entra admin center under **Password reset > Properties**, I set **Self service password reset enabled** to **Selected** and targeted `Lab2-Security-Group`.
 
-![SSPR Properties Scoped to Security Group](images/01-sspr-properties-group-scope.png)
+![SSPR Properties Scoped to Security Group](images01-sspr-properties-group-scope.png)
 
 ### 2. Configured Two-Method Verification Policy
 Under **Password reset > Authentication methods**, I set the **Number of methods required to reset** to `2` and configured the unified **Authentication methods policy** so users can register and verify with **Email OTP** and **Microsoft Authenticator**.
 
-![SSPR Authentication Methods Configuration](images/02-sspr-authentication-methods.png)
+![SSPR Authentication Methods Configuration](images02-sspr-authentication-methods.png)
 
 ### 3. Registered Recovery Methods & Initiated SSPR
 After adding test user `chimaa@://onmicrosoft.com` to `Lab2-Security-Group`, I completed the mandatory sign-in registration prompt and initiated a password reset via **Forgot my password**, verifying both **verification step 1** (alternate email code) and **verification step 2** (Microsoft Authenticator).
 
-![SSPR Two-Step Verification Challenge](images/03-sspr-verification-steps.png)
+![SSPR Two-Step Verification Challenge](images03-sspr-verification-steps.png)
 
 ### 4. Confirmed Successful Password Reset
 After passing both verification challenges and setting a new password compliant with our Lab 3 custom banned password list, Entra confirmed the reset (`Your password has been reset`).
 
-![SSPR Password Reset Confirmation](images/04-sspr-reset-confirmation.png)
+![SSPR Password Reset Confirmation](images04-sspr-reset-confirmation.png)
